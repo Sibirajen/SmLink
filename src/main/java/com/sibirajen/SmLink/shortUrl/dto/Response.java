@@ -1,6 +1,6 @@
-package com.sibirajen.SmLink.dto;
+package com.sibirajen.SmLink.shortUrl.dto;
 
-public class ShortenResponse {
+public class Response {
     private Long id;
     private String url;
     private String shortCode;

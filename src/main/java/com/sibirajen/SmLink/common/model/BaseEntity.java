@@ -1,4 +1,4 @@
-package com.sibirajen.SmLink.model;
+package com.sibirajen.SmLink.common.model;
 
 import jakarta.persistence.*;
 import lombok.*;

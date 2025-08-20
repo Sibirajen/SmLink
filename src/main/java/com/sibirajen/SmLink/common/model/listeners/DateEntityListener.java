@@ -1,6 +1,6 @@
-package com.sibirajen.SmLink.model.listeners;
+package com.sibirajen.SmLink.common.model.listeners;
 
-import com.sibirajen.SmLink.model.DateEntity;
+import com.sibirajen.SmLink.common.model.DateEntity;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 

@@ -1,5 +1,6 @@
-package com.sibirajen.SmLink.model;
+package com.sibirajen.SmLink.shortUrl.model;
 
+import com.sibirajen.SmLink.common.model.DateEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +13,7 @@ import lombok.*;
 @Entity
 @Table(name = "short_urls")
 @Access(AccessType.FIELD)
-public class ShortUrls extends DateEntity {
+public class ShortUrl extends DateEntity {
     @Column(name = "short_code", nullable = false, unique = true, length = 20)
     private String shortCode;
 

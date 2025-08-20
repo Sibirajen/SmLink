@@ -1,6 +1,6 @@
-package com.sibirajen.SmLink.model;
+package com.sibirajen.SmLink.common.model;
 
-import com.sibirajen.SmLink.model.listeners.DateEntityListener;
+import com.sibirajen.SmLink.common.model.listeners.DateEntityListener;
 import jakarta.persistence.*;
 import lombok.*;
 
