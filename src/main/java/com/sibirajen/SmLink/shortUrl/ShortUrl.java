@@ -1,4 +1,4 @@
-package com.sibirajen.SmLink.shortUrl.model;
+package com.sibirajen.SmLink.shortUrl;
 
 import com.sibirajen.SmLink.common.model.DateEntity;
 import jakarta.persistence.*;
