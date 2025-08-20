@@ -1,12 +1,14 @@
 package com.sibirajen.SmLink.shortUrl;
 
+import com.sibirajen.SmLink.shortUrl.dto.Request;
 import com.sibirajen.SmLink.shortUrl.dto.Response;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/shorten")
@@ -19,8 +21,19 @@ public class ShortUrlController {
     }
 
     @GetMapping("/{shortCode}")
-    public ResponseEntity<Response> getShortUrl(@PathVariable String shortCode){
-        Response response = shortUrlService.getShortUrl(shortCode);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Response> getShortUrl(@PathVariable("shortCode") String shortCode){
+        Optional<Response> optionalResponse = shortUrlService.getShortUrl(shortCode);
+        return optionalResponse.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    @PostMapping("/{shortCode}")
+    public  ResponseEntity<Response> updateShortUrl(
+            @PathVariable("shortCode") String shortCode,
+            @Valid @RequestBody Request request
+    ){
+        Optional<Response> optionalResponse = shortUrlService.updateShortUrl(shortCode, request);
+        return optionalResponse.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }
