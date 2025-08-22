@@ -27,7 +27,7 @@ public class ShortUrlController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @PostMapping("/{shortCode}")
+    @PutMapping("/{shortCode}")
     public  ResponseEntity<Response> updateShortUrl(
             @PathVariable("shortCode") String shortCode,
             @Valid @RequestBody Request request
