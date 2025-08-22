@@ -36,4 +36,11 @@ public class ShortUrlController {
         return optionalResponse.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
+
+    @PostMapping
+    public ResponseEntity<Response> createShortUrl(@Valid @RequestBody Request request){
+        Optional<Response> optionalResponse = shortUrlService.createShortUrl(request);
+        return optionalResponse.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
+    }
 }
