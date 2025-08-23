@@ -1,5 +1,6 @@
 package com.sibirajen.SmLink.shortUrl;
 
+import com.sibirajen.SmLink.common.dto.StatResponse;
 import com.sibirajen.SmLink.shortUrl.dto.Request;
 import com.sibirajen.SmLink.shortUrl.dto.Response;
 import jakarta.validation.Valid;
@@ -28,7 +29,7 @@ public class ShortUrlController {
     }
 
     @PutMapping("/{shortCode}")
-    public  ResponseEntity<Response> updateShortUrl(
+    public ResponseEntity<Response> updateShortUrl(
             @PathVariable("shortCode") String shortCode,
             @Valid @RequestBody Request request
     ){
@@ -42,5 +43,12 @@ public class ShortUrlController {
         Optional<Response> optionalResponse = shortUrlService.createShortUrl(request);
         return optionalResponse.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
+    }
+
+    @GetMapping("/{shortCode}/stats")
+    public ResponseEntity<StatResponse> getStats(@PathVariable("shortCode") String shortCode){
+        Optional<StatResponse> optionalResponse = shortUrlService.getStats(shortCode);
+        return optionalResponse.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }
