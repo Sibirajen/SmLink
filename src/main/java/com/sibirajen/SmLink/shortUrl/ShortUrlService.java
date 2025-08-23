@@ -1,5 +1,6 @@
 package com.sibirajen.SmLink.shortUrl;
 
+import com.sibirajen.SmLink.common.dto.StatResponse;
 import com.sibirajen.SmLink.common.utility.Base62Utility;
 import com.sibirajen.SmLink.shortUrl.dto.Request;
 import com.sibirajen.SmLink.shortUrl.dto.Response;
@@ -49,6 +50,11 @@ public class ShortUrlService {
                 });
     }
 
+    public Optional<StatResponse> getStats(String shortCode) {
+        return shortUrlRepo.findByShortCode(shortCode)
+                .map(this::mapToStatResponse);
+    }
+
     private Response mapToResponse(ShortUrl shortUrl) {
         return Response.builder()
                 .id(shortUrl.getId())
@@ -56,6 +62,17 @@ public class ShortUrlService {
                 .shortCode(shortUrl.getShortCode())
                 .createdAt(shortUrl.getCreatedAt())
                 .updatedAt(shortUrl.getUpdatedAt())
+                .build();
+    }
+
+    private StatResponse mapToStatResponse(ShortUrl shortUrl){
+        return StatResponse.builder()
+                .id(shortUrl.getId())
+                .url(shortUrl.getOriginalUrl())
+                .shortCode(shortUrl.getShortCode())
+                .createdAt(shortUrl.getCreatedAt())
+                .updatedAt(shortUrl.getUpdatedAt())
+                .accessCount(shortUrl.getAccessCount())
                 .build();
     }
 }
