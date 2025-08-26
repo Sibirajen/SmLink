@@ -75,4 +75,11 @@ public class ShortUrlService {
                 .accessCount(shortUrl.getAccessCount())
                 .build();
     }
+
+    @Transactional
+    public Optional<String> getLongUrl(String shortCode) {
+        Optional<String> optionalOriginalUrl = shortUrlRepo.findOriginalUrl(shortCode);
+        optionalOriginalUrl.ifPresent( url -> shortUrlRepo.incrementAccessCount(shortCode));
+        return optionalOriginalUrl;
+    }
 }
